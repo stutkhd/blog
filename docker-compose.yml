@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: blog_dev
+    command: python3 manage.py runserver 0.0.0.0:13000
+    volumes:
+      - .:/code
+    ports:
+      - "13000:13000"
+    tty: true
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=hoge
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    container_name: blog_db
+    ports:
+      - '5432'
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres

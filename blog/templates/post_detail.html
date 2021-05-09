@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }} - マイブログ{% endblock %}
+
+{% block content %}
+  <div class='card p-4'>
+    <div class='card-body'>
+      <h2 class='card-title'>
+        {{ post.title }}
+      </h2>
+      <h6 class='card-subtitle mb-3 text-muted'>
+        {{ post.created_at }}
+      </h6>
+      <!-- 文字列にあるhttps://のような文字をリンクへ変換する -> aタグに自動変換する -->
+      <p>{{ post.body|linebreaksbr|urlize}}</p>
+
+      <a href="{% url 'post_list' %}">一覧に戻る</a>
+    </div>
+  </div>
+{% endblock %}
